@@ -1,10 +1,13 @@
 require 'sinatra'
-require './Config/db.rb'
-require 'json/ext' # required for .to_json
-require 'sinatra/param'
-require './UseCases/traces.rb'
+require '../Model/links'
 
-
-get '/' do
-    'Welcome to Traces API!'
+get '/:token' do
+    url = Links.checkToken(params[:token])
+    if (url)
+        redirect "http://" + url
+    else
+        halt 404, {'Content-Type' => 'application/json'}, '{"Message": "There is nothing here :|"}'
+    end
 end
+
+
