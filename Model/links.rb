@@ -12,4 +12,16 @@ class Links
         return false
     end
 
+    def self.addShortUrl(url, token)
+        puts @data[url]=token
+    end  
+
+    def self.deleteShortUrl(token)
+        url = @data.key(token)
+        if(url)
+            @data.delete(url)
+        else
+            return false
+        end
+    end
 end
